@@ -14,7 +14,7 @@ const QuizList = () => {
   useEffect(() => {
     const fetchQuizzes = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/quizzes');
+        const response = await axios.get('https://quiz-application-3-grm7.onrender.com/api/quizzes');
         setQuizzes(response.data);
       } catch (error) {
         console.error('Error fetching quizzes:', error);
