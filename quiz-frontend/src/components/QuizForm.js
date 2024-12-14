@@ -17,7 +17,7 @@ const QuizForm = ({ onQuizAdded }) => {
     const quizData = { question, options, correctAnswer };
 
     try {
-      const response = await axios.post('http://localhost:3000/api/quizzes', quizData);
+      const response = await axios.post('https://quiz-application-3-grm7.onrender.com/api/quizzes', quizData);
       onQuizAdded(response.data);
       setQuestion('');
       setOptions(['', '', '', '']);
