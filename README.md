@@ -39,6 +39,8 @@ React.js - npm start
 
 ![Quiz Dashboard](images/image1.png)
 
+![Add Quiz](images/image2.png)
+
 
 
 
