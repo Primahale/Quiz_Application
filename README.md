@@ -37,7 +37,7 @@ React.js - npm start
 
 ## Screenshots
 
-![Quiz Dashboard](https://github.com/Primahale/Quiz_Application/tree/main/images/image1.png)
+![Quiz Dashboard]("/images/image1.png)
 
 
 
