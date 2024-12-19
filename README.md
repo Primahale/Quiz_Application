@@ -14,25 +14,29 @@ Prerequisites
 Ensure you have the following installed:
 
 
-Clone the repository
+**Clone the repository**
 Clone this repository to your local machine:
-
+```bash
 git clone https://github.com/your-username/quiz-app.git
-
 cd quiz-app
+```
 
-Install dependencies
+
+**Install dependencies**
 To install the required dependencies, run the following command:
 
+```bash
 npm install
+```
 
 This will install all the necessary packages for both frontend and backend.
 
-Running the App
-
+**Running the App**
+```bash
 Node.js - npm run dev
 
 React.js - npm start
+```
 
 
 ## Screenshots
