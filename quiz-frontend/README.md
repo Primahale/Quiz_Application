@@ -1,5 +1,5 @@
 # Getting Started with Create React App
-![Description of Image](https://drive.google.com/file/d/1yFizzcK_ABAAZvPMgoJ7dcy_2VFY-H4V/view?usp=drive_link)
+![Description of Image](https://drive.google.com/file/d/1yFizzcK_ABAAZvPMgoJ7dcy_2VFY-H4V/view?usp=sharing)
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
