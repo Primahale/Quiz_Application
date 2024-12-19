@@ -35,7 +35,10 @@ Node.js - npm run dev
 React.js - npm start
 
 
-Screenshots
+## Screenshots
+
+![Quiz Dashboard](./images/image1.ppg)
+
 
 
 
