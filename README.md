@@ -37,7 +37,7 @@ React.js - npm start
 
 ## Screenshots
 
-![Quiz Dashboard]("/images/image1.png)
+![Quiz Dashboard](images/image1.png)
 
 
 
