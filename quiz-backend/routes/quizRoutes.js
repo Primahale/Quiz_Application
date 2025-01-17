@@ -3,23 +3,17 @@ const Quiz = require('../models/Quiz');
 const router = express.Router();
 
 
-router.post('/quizzes', async (req, res) => {
-  const { questions, title } = req.body;
-
-  // if (!question || !options || correctAnswer === undefined) {
-  //   return res.status(400).json({ message: 'All fields are required' });
-  // }
-
+router.post('/add-quiz', async (req, res) => {
+  const { quizTitle, questions } = req.body;
   try {
-    const newQuiz = new Quiz({ title , questions });
-    const savedQuiz = await newQuiz.save();
-    res.status(201).json(savedQuiz);
+      const newQuiz = new Quiz({ title: quizTitle, questions });
+      await newQuiz.save();
+      res.status(201).json({ message: 'Quiz added successfully!' });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: 'Error saving quiz' });
+      console.error('Error adding quiz:', error);
+      res.status(500).json({ message: 'Error adding quiz.', error });
   }
 });
-
 
 router.get('/', async (req, res) => {
   try {
