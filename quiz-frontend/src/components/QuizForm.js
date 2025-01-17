@@ -1,67 +1,87 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const QuizForm = ({ onQuizAdded }) => {
-  const [question, setQuestion] = useState('');
-  const [options, setOptions] = useState(['', '', '', '']);
-  const [correctAnswer, setCorrectAnswer] = useState(0);
+const AddQuiz = () => {
+    const [quizTitle, setQuizTitle] = useState('');
+    const [questions, setQuestions] = useState([{ questionText: '', options: ['', '', '', ''], correctAnswer: '' }]);
 
-  const handleOptionChange = (index, value) => {
-    const newOptions = [...options];
-    newOptions[index] = value;
-    setOptions(newOptions);
-  };
+    const handleQuestionChange = (index, field, value) => {
+        const updatedQuestions = [...questions];
+        if (field === 'options') {
+            updatedQuestions[index].options = value; // Update options
+        } else {
+            updatedQuestions[index][field] = value; // Update questionText or correctAnswer
+        }
+        setQuestions(updatedQuestions);
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const quizData = { question, options, correctAnswer };
+    const addQuestion = () => {
+        setQuestions([...questions, { questionText: '', options: ['', '', '', ''], correctAnswer: '' }]);
+    };
 
-    try {
-      const response = await axios.post('https://quiz-application-3-grm7.onrender.com/api/quizzes', quizData);
-      onQuizAdded(response.data);
-      setQuestion('');
-      setOptions(['', '', '', '']);
-      setCorrectAnswer(0);
-      alert('Quiz added successfully!');
-    } catch (error) {
-      // console.error('Error adding quiz:', error);
-      // alert('Failed to add quiz.');
-    }
-    window.location.reload();
-  };
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('/api/add-quiz', { quizTitle, questions });
+            alert(response.data.message);
+        } catch (error) {
+            console.error(error);
+            alert('Error adding quiz.');
+        }
+    };
 
-  return (
-    <form onSubmit={handleSubmit}>
-      <h2>Create a Quiz</h2>
-      <div>
-        <label>Question:</label>
-        <input type="text" value={question} onChange={(e) => setQuestion(e.target.value)} required />
-      </div>
-      <div>
-        <label>Options:</label>
-        {options.map((option, index) => (
-          <div key={index}>
-            <input
-              type="text"
-              value={option}
-              onChange={(e) => handleOptionChange(index, e.target.value)}
-              required
-            />
-          </div>
-        ))}
-      </div>
-      <div>
-        <label>Correct Answer (Index):</label>
-        <input
-          type="number"
-          value={correctAnswer}
-          onChange={(e) => setCorrectAnswer(Number(e.target.value))}
-          required
-        />
-      </div>
-      <button type="submit">Add Quiz</button>
-    </form>
-  );
+    return (
+        <div>
+            <h2>Add Quiz</h2>
+            <form onSubmit={handleSubmit}>
+                <input
+                    type="text"
+                    placeholder="Quiz Title"
+                    value={quizTitle}
+                    onChange={(e) => setQuizTitle(e.target.value)}
+                    required
+                />
+                {questions.map((question, index) => (
+                    <div key={index} style={{ marginTop: '1rem' }}>
+                        <input
+                            type="text"
+                            placeholder="Question Text"
+                            value={question.questionText}
+                            onChange={(e) => handleQuestionChange(index, 'questionText', e.target.value)}
+                            required
+                        />
+                        {question.options.map((option, optIndex) => (
+                            <input
+                                key={optIndex}
+                                type="text"
+                                placeholder={`Option ${optIndex + 1}`}
+                                value={option}
+                                onChange={(e) =>
+                                    handleQuestionChange(index, 'options', [
+                                        ...question.options.slice(0, optIndex),
+                                        e.target.value,
+                                        ...question.options.slice(optIndex + 1),
+                                    ])
+                                }
+                                required
+                            />
+                        ))}
+                        <input
+                            type="text"
+                            placeholder="Correct Answer"
+                            value={question.correctAnswer}
+                            onChange={(e) => handleQuestionChange(index, 'correctAnswer', e.target.value)}
+                            required
+                        />
+                    </div>
+                ))}
+                <button type="button" onClick={addQuestion}>
+                    Add Another Question
+                </button>
+                <button type="submit">Submit Quiz</button>
+            </form>
+        </div>
+    );
 };
 
-export default QuizForm;
+export default AddQuiz;
