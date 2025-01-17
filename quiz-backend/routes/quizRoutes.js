@@ -4,14 +4,14 @@ const router = express.Router();
 
 
 router.post('/quizzes', async (req, res) => {
-  const { question, options, correctAnswer } = req.body;
+  const { questions, title } = req.body;
 
-  if (!question || !options || correctAnswer === undefined) {
-    return res.status(400).json({ message: 'All fields are required' });
-  }
+  // if (!question || !options || correctAnswer === undefined) {
+  //   return res.status(400).json({ message: 'All fields are required' });
+  // }
 
   try {
-    const newQuiz = new Quiz({ question, options, correctAnswer });
+    const newQuiz = new Quiz({ title , questions });
     const savedQuiz = await newQuiz.save();
     res.status(201).json(savedQuiz);
   } catch (error) {
