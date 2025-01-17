@@ -26,7 +26,7 @@ const QuizForm = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/api/add-quiz', { quizTitle, questions });
+            const response = await axios.post('http://localhost:3000/api/add-quiz', { quizTitle, questions });
             alert(response.data.message);
         } catch (error) {
             console.error('Error adding quiz:', error);
